@@ -1,0 +1,27 @@
+# Checks for yt_api table in core schema
+# Note: Column names must be quoted because they're case-sensitive in Postgres
+
+checks for yt_api:
+  # Check for missing Video_ID (NULL values)
+  - missing_count("Video_ID") = 0:
+      name: No missing Video IDs
+  
+  # Check for duplicate Video_ID
+  - duplicate_count("Video_ID") = 0:
+      name: No duplicate Video IDs
+  
+  # Check if likes exceed views (data quality issue)
+  - likes_count_greater_than_vid_views = 0:
+      name: Likes should not exceed Views
+      likes_count_greater_than_vid_views query: |
+        SELECT COUNT(*)
+        FROM yt_api
+        WHERE "Likes_Count" > "Video_Views"
+  
+  # Check if comments exceed views (data quality issue)
+  - comments_count_greater_than_vid_views = 0:
+      name: Comments should not exceed Views
+      comments_count_greater_than_vid_views query: |
+        SELECT COUNT(*)
+        FROM yt_api
+        WHERE "Comments_Count" > "Video_Views"

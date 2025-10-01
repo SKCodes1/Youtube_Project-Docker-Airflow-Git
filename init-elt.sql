@@ -1,0 +1,4 @@
+CREATE USER yt_api_user WITH PASSWORD 'X57tmQ846GYP3Jgb';
+CREATE DATABASE elt_db OWNER yt_api_user;
+GRANT ALL PRIVILEGES ON DATABASE elt_db TO yt_api_user;
+ 
