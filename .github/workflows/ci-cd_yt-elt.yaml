@@ -41,7 +41,7 @@ jobs:
                         --tag ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:1.0.1
                         --tag ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:${{ github.sha }}
 
-                        
+                        .
             
 
     unit-and-integration-and-e2e-tests:
