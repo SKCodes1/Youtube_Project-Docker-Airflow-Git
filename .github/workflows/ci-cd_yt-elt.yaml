@@ -42,9 +42,10 @@ jobs:
       - name: Build and push Docker image
         if: steps.changed-files-build.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'
         run: |
+          echo "Building and pushing Docker image..."
           docker buildx build --push \
-            --tag ${{ secrets.DOCKERHUB_USERNAME }}/youtube_airflow-docker:1.0.1 \
-            --tag ${{ secrets.DOCKERHUB_USERNAME }}/youtube_airflow-docker:${{ github.sha }} \
+            --tag ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_REPOSITORY }}:1.0.1 \
+            --tag ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_REPOSITORY }}:${{ github.sha }} \
             .
 
   unit-and-integration-and-e2e-tests:
@@ -72,6 +73,10 @@ jobs:
       POSTGRES_CONN_USERNAME: ${{ secrets.POSTGRES_CONN_USERNAME }}
       AIRFLOW_UID: ${{ vars.AIRFLOW_UID }}
       CHANNEL_HANDLE: ${{ vars.CHANNEL_HANDLE }}
+      DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE }}
+      DOCKERHUB_REPOSITORY: ${{ vars.DOCKERHUB_REPOSITORY }}
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
