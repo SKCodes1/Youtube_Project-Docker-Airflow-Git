@@ -38,9 +38,10 @@ jobs:
             - name: Build and push Docker image
               run: |
                       docker buildx build --push \
-                        --tag ${{ secrets.DOCKERHUB_NAMESPACE }}/${{ secrets.DOCKERHUB_REPOSITORY }}:1.0.1 \
-                        --tag ${{ secrets.DOCKERHUB_NAMESPACE }}/${{ secrets.DOCKERHUB_REPOSITORY }}:${{ github.sha }} \
-                        .
+                        --tag ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:1.0.1
+                        --tag ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:${{ github.sha }}
+
+                        
             
 
     unit-and-integration-and-e2e-tests:
