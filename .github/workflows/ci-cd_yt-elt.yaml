@@ -31,7 +31,7 @@ jobs:
               uses: docker/login-action@v3
               with:
                 username: ${{ secrets.DOCKERHUB_USERNAME }}
-                password: ${{ secrets.DOCKERHUB_PASSWORD }}
+                password: dckr_pat_ntdk-gN07X_YdevRIy4DkJU5J
             - name: Build and push Docker image
               run: |
                       docker buildx build --push \
