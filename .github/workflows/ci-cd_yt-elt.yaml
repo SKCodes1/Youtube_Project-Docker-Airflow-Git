@@ -44,14 +44,14 @@ jobs:
 
             - name: Verify Docker login
               run: docker info | grep Username
+              
             - name: Build and push Docker image
               run: |
-                      docker buildx build --push \
-                        --tag ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:1.0.1
-                        --tag ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:${{ github.sha }}
+                docker buildx build --push \
+                  --tag ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:1.0.1 \
+                  --tag ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:${{ github.sha }} \
+                  .
 
-                        .
-            
 
     unit-and-integration-and-e2e-tests:
       runs-on: ubuntu-latest
